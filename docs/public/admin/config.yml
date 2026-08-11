@@ -16,7 +16,7 @@ media_folder: "docs/public/images"
 public_folder: "/images"
 
 # 站点 URL（用于生成文章链接等）
-site_url: https://knowledge-base.example.com
+site_url: https://knowledge-base-mlyw2k7r.edgeone.cool
 
 # 本地化
 locale: 'zh_Hans'
