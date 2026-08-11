@@ -1,0 +1,17 @@
+{
+  "name": "knowledge-base",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "个人知识库 - VitePress + Decap CMS",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.3"
+  },
+  "dependencies": {
+    "@rollup/rollup-win32-x64-msvc": "^4.62.4"
+  }
+}

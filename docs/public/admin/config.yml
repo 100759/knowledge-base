@@ -1,0 +1,73 @@
+# Decap CMS 配置文件
+# ========================================
+# 后端配置：GitHub OAuth 认证
+# 部署后需要替换 PLACEHOLDER 值为实际 OAuth 应用信息
+# ========================================
+backend:
+  name: github
+  repo: 100759/knowledge-base
+  branch: main
+  auth_type: oauth
+  app_id: PLACEHOLDER_GITHUB_CLIENT_ID
+  proxy_url: PLACEHOLDER_OAUTH_PROXY_URL
+
+# 媒体文件存储路径
+media_folder: "docs/public/images"
+public_folder: "/images"
+
+# 站点 URL（用于生成文章链接等）
+site_url: https://knowledge-base.example.com
+
+# 本地化
+locale: 'zh_Hans'
+
+# ========================================
+# 内容集合
+# ========================================
+collections:
+  # ---- 知识文章 ----
+  - name: "articles"
+    label: "知识文章"
+    label_singular: "文章"
+    folder: "docs/articles"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}} — {{category}}"
+    fields:
+      - { label: "标题", name: "title", widget: "string", hint: "文章标题" }
+      - { label: "描述", name: "description", widget: "string", required: false, hint: "一句话描述文章内容" }
+      - { label: "发布日期", name: "date", widget: "datetime", default: "{{now}}" }
+      - label: "分类"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "技术", value: "技术" }
+          - { label: "生活", value: "生活" }
+          - { label: "学习", value: "学习" }
+          - { label: "工作", value: "工作" }
+          - { label: "随笔", value: "随笔" }
+          - { label: "其他", value: "其他" }
+        default: "技术"
+      - { label: "标签", name: "tags", widget: "list", required: false, hint: "多个标签用回车分隔" }
+      - { label: "正文", name: "body", widget: "markdown", hint: "支持 Markdown 语法和富文本编辑" }
+
+  # ---- 使用指南 ----
+  - name: "guide"
+    label: "使用指南"
+    label_singular: "指南"
+    folder: "docs/guide"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}}"
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "描述", name: "description", widget: "string", required: false }
+      - { label: "发布日期", name: "date", widget: "datetime", default: "{{now}}" }
+      - { label: "排序", name: "order", widget: "number", default: 1, hint: "数字越小越靠前" }
+      - { label: "正文", name: "body", widget: "markdown" }
