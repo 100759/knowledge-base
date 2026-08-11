@@ -5,3 +5,4 @@ docs/.vitepress/cache/
 *.log
 docs/.vitepress/config.ts.timestamp-*
 docs/.vitepress/cache/
+.env

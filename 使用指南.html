@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>知识库使用指南</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.8;
+      color: #333;
+      background: #f5f7fa;
+      padding: 40px 20px;
+    }
+    .container { max-width: 860px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 48px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    h1 { font-size: 28px; margin-bottom: 8px; color: #1a1a2e; }
+    .subtitle { color: #666; font-size: 15px; margin-bottom: 32px; }
+    h2 { font-size: 22px; margin: 36px 0 16px; color: #1a1a2e; border-left: 4px solid #3451b2; padding-left: 12px; }
+    h3 { font-size: 17px; margin: 24px 0 12px; color: #2c3e50; }
+    p { margin-bottom: 12px; color: #555; }
+    .url-box {
+      background: #f0f4ff;
+      border: 1px solid #d0dfff;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      word-break: break-all;
+    }
+    .url-box .label { font-size: 13px; color: #888; margin-bottom: 4px; }
+    .url-box .url { font-family: 'SF Mono', Monaco, Consolas, monospace; font-size: 14px; color: #3451b2; }
+    .step {
+      background: #fafbfc;
+      border: 1px solid #e1e4e8;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 12px 0;
+    }
+    .step-num {
+      display: inline-block;
+      width: 28px; height: 28px;
+      background: #3451b2;
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-size: 14px;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+    .warn {
+      background: #fff8e1;
+      border: 1px solid #ffe082;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+    .warn strong { color: #f57f17; }
+    .tip {
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+    .tip strong { color: #2e7d32; }
+    code {
+      background: #f1f3f5;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'SF Mono', Monaco, Consolas, monospace;
+      font-size: 13px;
+      color: #d6336c;
+    }
+    ol { padding-left: 20px; margin: 12px 0; }
+    ol li { margin-bottom: 8px; color: #555; }
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .badge-done { background: #e8f5e9; color: #2e7d32; }
+    .badge-todo { background: #fff3e0; color: #e65100; }
+    hr { border: none; border-top: 1px solid #eee; margin: 32px 0; }
+    .footer { text-align: center; color: #999; font-size: 13px; margin-top: 40px; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>知识库使用指南</h1>
+  <p class="subtitle">VitePress + Decap CMS + EdgeOne Pages — 完整搭建与使用说明</p>
+
+  <h2>站点信息</h2>
+  <div class="url-box">
+    <div class="label">知识库站点地址</div>
+    <div class="url">https://knowledge-base-mlyw2k7r.edgeone.cool</div>
+  </div>
+  <div class="url-box">
+    <div class="label">后台管理地址</div>
+    <div class="url">https://knowledge-base-mlyw2k7r.edgeone.cool/admin/</div>
+  </div>
+  <div class="url-box">
+    <div class="label">GitHub 仓库</div>
+    <div class="url">https://github.com/100759/knowledge-base</div>
+  </div>
+
+  <div class="warn">
+    <strong>注意：</strong>当前站点地址带有临时认证参数（eo_token），有效期约 3 小时。需要在 EdgeOne 控制台绑定自定义域名或设为公开访问后，才能永久免认证访问。详见下方「设置永久访问」部分。
+  </div>
+
+  <hr>
+
+  <h2>待完成步骤 <span class="badge badge-todo">需要操作</span></h2>
+  <p>站点已部署，但后台管理（/admin/）需要完成以下 OAuth 配置后才能使用：</p>
+
+  <h3>第一步：创建 GitHub OAuth 应用</h3>
+  <div class="step">
+    <p><span class="step-num">1</span>打开 <a href="https://github.com/settings/developers" target="_blank">https://github.com/settings/developers</a></p>
+    <p><span class="step-num">2</span>点击「New OAuth App」</p>
+    <p><span class="step-num">3</span>填写以下信息：</p>
+    <ul>
+      <li><strong>Application name</strong>：知识库后台</li>
+      <li><strong>Homepage URL</strong>：<code>https://knowledge-base-mlyw2k7r.edgeone.cool</code></li>
+      <li><strong>Authorization callback URL</strong>：暂时填 <code>https://knowledge-base-mlyw2k7r.edgeone.cool</code>（后面部署 Worker 后会更新）</li>
+    </ul>
+    <p><span class="step-num">4</span>创建后，记录下 <strong>Client ID</strong></p>
+    <p><span class="step-num">5</span>点击「Generate a new client secret」，生成并记录下 <strong>Client Secret</strong></p>
+  </div>
+
+  <h3>第二步：部署 Cloudflare Worker（OAuth 代理）</h3>
+  <p>Decap CMS 需要一个服务器端代理来处理 GitHub OAuth 认证。我们使用 Cloudflare Workers（免费）来实现。</p>
+  <div class="step">
+    <p><span class="step-num">1</span>注册/登录 <a href="https://dash.cloudflare.com/sign-up" target="_blank">Cloudflare</a>（免费）</p>
+    <p><span class="step-num">2</span>进入左侧菜单「Workers & Pages」</p>
+    <p><span class="step-num">3</span>点击「Create」→「Create Worker」</p>
+    <p><span class="step-num">4</span>给 Worker 起个名字，如 <code>decap-oauth</code>，点击「Deploy」</p>
+    <p><span class="step-num">5</span>部署后点击「Edit code」，删除编辑器中的所有默认代码</p>
+    <p><span class="step-num">6</span>打开项目仓库中的 <code>oauth-worker/worker.js</code> 文件，复制全部内容粘贴到编辑器中</p>
+    <p><span class="step-num">7</span>点击右上角「Deploy」保存</p>
+    <p><span class="step-num">8</span>进入 Worker 的「Settings」→「Variables」</p>
+    <p><span class="step-num">9</span>添加两个环境变量：</p>
+    <ul>
+      <li><code>GITHUB_CLIENT_ID</code> = 第一步获取的 Client ID</li>
+      <li><code>GITHUB_CLIENT_SECRET</code> = 第一步获取的 Client Secret</li>
+    </ul>
+    <p><span class="step-num">10</span>保存后，记录下 Worker 的 URL，格式类似：<code>https://decap-oauth.xxx.workers.dev</code></p>
+  </div>
+
+  <h3>第三步：更新 GitHub OAuth 回调地址</h3>
+  <div class="step">
+    <p><span class="step-num">1</span>回到 GitHub OAuth 应用设置页面</p>
+    <p><span class="step-num">2</span>将 <strong>Authorization callback URL</strong> 改为你的 Worker URL：<code>https://decap-oauth.xxx.workers.dev</code></p>
+    <p><span class="step-num">3</span>保存</p>
+  </div>
+
+  <h3>第四步：告诉我 OAuth 信息</h3>
+  <div class="tip">
+    <strong>这一步你不需要改任何文件！</strong>
+    <p>把以下两个信息发给我（在对话中回复即可）：</p>
+    <ol>
+      <li>GitHub OAuth App 的 <strong>Client ID</strong></li>
+      <li>Cloudflare Worker 的 <strong>URL</strong>（如 <code>https://decap-oauth.xxx.workers.dev</code>）</li>
+    </ol>
+    <p>我会自动更新配置文件并重新部署站点。</p>
+  </div>
+
+  <hr>
+
+  <h2>日常使用指南 <span class="badge badge-done">配置完成后</span></h2>
+
+  <h3>如何发布新文章</h3>
+  <ol>
+    <li>打开后台管理地址：<code>https://你的域名/admin/</code></li>
+    <li>使用 GitHub 账号登录</li>
+    <li>在左侧选择「知识文章」或「使用指南」</li>
+    <li>点击右上角「新建 文章」按钮</li>
+    <li>填写标题、选择分类、添加标签</li>
+    <li>在正文编辑器中编写内容（支持富文本和 Markdown 两种模式）</li>
+    <li>点击右上角「发布」按钮</li>
+    <li>等待 1-2 分钟，文章自动出现在站点上</li>
+  </ol>
+
+  <h3>如何修改已有文章</h3>
+  <ol>
+    <li>打开后台管理地址</li>
+    <li>在左侧选择对应的分类</li>
+    <li>在文章列表中找到要修改的文章，点击进入</li>
+    <li>修改内容后点击「发布」</li>
+    <li>等待自动部署完成</li>
+  </ol>
+
+  <h3>如何删除文章</h3>
+  <ol>
+    <li>在文章列表中找到要删除的文章</li>
+    <li>点击文章进入编辑页面</li>
+    <li>点击右上角「删除」按钮</li>
+    <li>确认删除</li>
+  </ol>
+
+  <h3>富文本编辑器使用</h3>
+  <p>Decap CMS 的 Markdown 编辑器支持两种模式切换：</p>
+  <ul>
+    <li><strong>富文本模式</strong>：所见即所得，类似 Word，适合不熟悉 Markdown 的用户</li>
+    <li><strong>Markdown 模式</strong>：直接编写 Markdown 源码，适合熟悉语法的用户</li>
+  </ul>
+  <p>点击编辑器右上角的切换按钮即可在两种模式间切换。</p>
+
+  <h3>插入图片</h3>
+  <ol>
+    <li>在编辑器中，将光标放在要插入图片的位置</li>
+    <li>使用工具栏的图片按钮，或直接拖拽图片到编辑器</li>
+    <li>图片会自动上传到 GitHub 仓库</li>
+    <li>图片会在文章中自动显示</li>
+  </ol>
+
+  <hr>
+
+  <h2>设置永久访问（推荐）</h2>
+  <p>当前站点地址带有临时认证参数，有效期约 3 小时。要设置永久访问：</p>
+  <div class="step">
+    <p><span class="step-num">1</span>登录 <a href="https://console.cloud.tencent.com/edgeone" target="_blank">腾讯云 EdgeOne 控制台</a></p>
+    <p><span class="step-num">2</span>找到项目「knowledge-base」</p>
+    <p><span class="step-num">3</span>在项目设置中，可以：</p>
+    <ul>
+      <li>绑定自定义域名（如 <code>kb.yourdomain.com</code>）</li>
+      <li>或关闭访问认证，使站点公开可访问</li>
+    </ul>
+    <p><span class="step-num">4</span>设置完成后，使用新域名访问站点和后台</p>
+  </div>
+
+  <h2>设置 GitHub 自动部署（推荐）</h2>
+  <p>当前部署是手动触发的。设置 GitHub 自动部署后，每次 Decap CMS 保存文章（即 push 到 GitHub），都会自动触发构建部署：</p>
+  <div class="step">
+    <p><span class="step-num">1</span>登录 EdgeOne 控制台，找到项目「knowledge-base」</p>
+    <p><span class="step-num">2</span>在「构建部署」或「Git 集成」设置中，连接 GitHub 仓库 <code>100759/knowledge-base</code></p>
+    <p><span class="step-num">3</span>配置构建设置：</p>
+    <ul>
+      <li>构建命令：<code>npm install &amp;&amp; npm run build</code></li>
+      <li>输出目录：<code>docs/.vitepress/dist</code></li>
+    </ul>
+    <p><span class="step-num">4</span>保存后，每次 push 代码到 main 分支都会自动构建部署</p>
+  </div>
+
+  <hr>
+
+  <h2>技术架构</h2>
+  <ul>
+    <li><strong>前端框架</strong>：VitePress v1.6.4（Vue 生态静态文档生成器）</li>
+    <li><strong>后台 CMS</strong>：Decap CMS v3.4.0（Git-based 内容管理）</li>
+    <li><strong>代码托管</strong>：GitHub（<a href="https://github.com/100759/knowledge-base">100759/knowledge-base</a>）</li>
+    <li><strong>部署平台</strong>：EdgeOne Pages（腾讯云）</li>
+    <li><strong>OAuth 代理</strong>：Cloudflare Workers（免费）</li>
+    <li><strong>侧边栏</strong>：自动生成，新增文章后自动出现在导航中</li>
+    <li><strong>搜索</strong>：VitePress 内置本地全文搜索</li>
+    <li><strong>暗黑模式</strong>：VitePress 内置，支持手动/自动切换</li>
+  </ul>
+
+  <div class="footer">
+    知识库搭建完成 — VitePress + Decap CMS + EdgeOne Pages
+  </div>
+</div>
+</body>
+</html>
